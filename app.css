@@ -15,11 +15,13 @@ body{
 }
 
 .box{
-  height: 50px;
-  width: 50px;
+  max-height: 50px;
+  max-width: 50px;
+  width: 10%;
+  height: 10%;
   border: 1px solid black;
   margin: 1px 1px;
-  padding-top: 15px;
+  padding: 1% 1%;
 }
 
 .circle{
@@ -51,4 +53,11 @@ body{
 
 .bg-blue{
   background-color: blue;
+}
+
+@media only screen and (max-width: 450px) {
+  .circle {
+    height: 20px;
+    width: 20px;
+  }
 }
