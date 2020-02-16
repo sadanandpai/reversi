@@ -49,10 +49,12 @@ body{
 
 .bg-red{
   background-color: red;
+  transition: background-color 0.5s;
 }
 
 .bg-blue{
   background-color: blue;
+  transition: background-color 0.5s;
 }
 
 @media only screen and (max-width: 450px) {

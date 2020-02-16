@@ -1,158 +1,292 @@
 navigator.serviceWorker.register("./sw.js");
 
 var bgColorClass = "bg-blue";
-var userTurn = true;
-var sequenceArray = [1, 8, 57, 64, 3, 4, 5, 6, 17, 24, 25, 32, 33, 40, 41, 48, 59, 60, 61, 62, 19, 20, 21, 22, 27, 30, 35, 38, 43, 44, 45,46, 11, 12, 13, 14, 18, 23, 26, 31, 34, 39, 42, 47, 2, 7, 9, 16, 49, 58, 56, 63, 10, 15, 50, 55];
+var sequenceArray1 = [
+  { i: 0, j: 0 },
+  { i: 0, j: 7 },
+  { i: 7, j: 0 },
+  { i: 7, j: 7 }
+];
+
+var sequenceArray2 = [
+  { i: 0, j: 2 },
+  { i: 0, j: 3 },
+  { i: 0, j: 4 },
+  { i: 0, j: 5 },
+  { i: 2, j: 0 },
+  { i: 2, j: 7 },
+  { i: 3, j: 0 },
+  { i: 3, j: 7 },
+  { i: 4, j: 0 },
+  { i: 4, j: 7 },
+  { i: 5, j: 0 },
+  { i: 5, j: 7 },
+  { i: 7, j: 2 },
+  { i: 7, j: 3 },
+  { i: 7, j: 4 },
+  { i: 7, j: 5 }
+];
+
+var sequenceArray3 = [
+  { i: 2, j: 2 },
+  { i: 2, j: 3 },
+  { i: 2, j: 4 },
+  { i: 2, j: 5 },
+  { i: 3, j: 2 },
+  { i: 3, j: 5 },
+  { i: 4, j: 2 },
+  { i: 4, j: 5 },
+  { i: 5, j: 2 },
+  { i: 5, j: 3 },
+  { i: 5, j: 4 },
+  { i: 5, j: 5 },
+  { i: 1, j: 2 },
+  { i: 1, j: 3 },
+  { i: 1, j: 4 },
+  { i: 1, j: 5 },
+  { i: 2, j: 1 },
+  { i: 2, j: 6 },
+  { i: 3, j: 1 },
+  { i: 3, j: 6 },
+  { i: 4, j: 1 },
+  { i: 4, j: 6 },
+  { i: 5, j: 1 },
+  { i: 5, j: 6 },
+  { i: 6, j: 2 },
+  { i: 6, j: 3 },
+  { i: 6, j: 4 },
+  { i: 6, j: 5 }
+];
+
+var sequenceArray4 = [
+  { i: 0, j: 1 },
+  { i: 0, j: 6 },
+  { i: 1, j: 0 },
+  { i: 1, j: 7 },
+  { i: 6, j: 0 },
+  { i: 7, j: 1 },
+  { i: 6, j: 7 },
+  { i: 7, j: 6 },
+  { i: 1, j: 1 },
+  { i: 1, j: 6 },
+  { i: 6, j: 1 },
+  { i: 6, j: 6 }
+];
+var clearTimeout = null;
 
 window.addEventListener("click", evt => {
-  var index = +evt.srcElement.id.split("circle")[1];
+  var i, j, index;
+
+  if (evt.srcElement.classList.contains("circle")) {
+    index = evt.srcElement.id.split("circle")[1];
+    i = +index.charAt(0);
+    j = +index.charAt(1);
+  }
+
   var color = bgColorClass.split("bg-")[1];
-  if (evt.srcElement.classList.contains("circle") && !evt.srcElement.classList.contains("colored") && isClickable(index, color)) {
+  if (
+    evt.srcElement.classList.contains("circle") &&
+    !evt.srcElement.classList.contains("colored") &&
+    isClickable(i, j, color) &&
+    clearTimeout === null
+  ) {
     evt.srcElement.classList.add("colored");
     evt.srcElement.classList.add(bgColorClass);
-    userTurn = false;
-    reverseAlgorithm(index, color);
+    reverseAlgorithm(i, j, color);
     bgColorClass = bgColorClass === "bg-red" ? "bg-blue" : "bg-red";
 
     displayResult();
-    computerClick();
+    clearTimeout = setTimeout(() => {
+      computerClick();
+      clearTimeout = null;
+    }, 1000);
   }
 });
 
-function reverseAlgorithm(index, color) {
+function reverseAlgorithm(i, j, color) {
   var oppositeColor = color === "blue" ? "red" : "blue";
   var indexArray;
   var toBeColored;
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, -8, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, -1, 0, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, 8, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, 1, 0, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, -1, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, 0, -1, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, 1, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, 0, 1, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, -9, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, -1, -1, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, -7, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, -1, 1, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, 7, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, 1, -1, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 
   indexArray = [];
   toBeColored = false;
-  toBeColored = colorChangeCheck(index, 9, color, indexArray);
+  toBeColored = colorChangeCheck(i, j, 1, 1, color, indexArray).toBeColored;
   colorChanger(toBeColored, indexArray, color, oppositeColor);
 }
 
-function isClickable(index, color) {
+function isClickable(i, j, color) {
   if (
-    colorChangeCheck(index, -8, color) ||
-    colorChangeCheck(index, 8, color) ||
-    colorChangeCheck(index, -1, color) ||
-    colorChangeCheck(index, 1, color) ||
-    colorChangeCheck(index, -7, color) ||
-    colorChangeCheck(index, -9, color) ||
-    colorChangeCheck(index, 7, color) ||
-    colorChangeCheck(index, 9, color)
+    colorChangeCheck(i, j, -1, 0, color).toBeColored ||
+    colorChangeCheck(i, j, 1, 0, color).toBeColored ||
+    colorChangeCheck(i, j, 0, -1, color).toBeColored ||
+    colorChangeCheck(i, j, 0, 1, color).toBeColored ||
+    colorChangeCheck(i, j, -1, -1, color).toBeColored ||
+    colorChangeCheck(i, j, -1, 1, color).toBeColored ||
+    colorChangeCheck(i, j, 1, -1, color).toBeColored ||
+    colorChangeCheck(i, j, 1, 1, color).toBeColored
   )
     return true;
   return false;
 }
 
-function colorChangeCheck(index, change, color, indexArray = []) {
+function getScore(i, j, color) {
+  return Math.max(
+    colorChangeCheck(i, j, -1, 0, color).score,
+    colorChangeCheck(i, j, 1, 0, color).score,
+    colorChangeCheck(i, j, 0, -1, color).score,
+    colorChangeCheck(i, j, 0, 1, color).score,
+    colorChangeCheck(i, j, -1, -1, color).score,
+    colorChangeCheck(i, j, -1, 1, color).score,
+    colorChangeCheck(i, j, 1, -1, color).score,
+    colorChangeCheck(i, j, 1, 1, color).score
+  );
+}
+
+function colorChangeCheck(i, j, row, column, color, indexArray = []) {
   var toBeColored = false;
-  var rightLimit;
-  var leftLimit;
 
-  if(change === 1 || change === -1){
-    rightLimit = Math.ceil(index / 8) * 8;
-    leftLimit = rightLimit - 7;
-  }
-  else if(change === -8 || change === 8){
-    rightLimit = 64;
-    leftLimit = 1;
-  }
-  else if(change === -7 || change === 7){
-    rightLimit = Math.min(64, index + ((index % 8) - 1) * 7);
-    leftLimit = Math.max(1, index - (8 - (index % 8)) * 7);
-  }
-  else if(change === -9 || change === 9){
-    rightLimit = Math.min(64, index + (8 -(index % 8)) * 9);
-    leftLimit = Math.max(1, index - ((index % 8) -1) * 9);
-  }
-
-  index = index + change;
-  while (index >= leftLimit && index <= rightLimit) {
-    if (document.getElementById("circle" + index).classList.contains("colored")) {
-      circleColor = document.getElementById("circle" + index).classList[3].split("bg-")[1];
+  i = i + row;
+  j = j + column;
+  while (i >= 0 && j >= 0 && i < 8 && j < 8) {
+    if (document.getElementById("circle" + i + j).classList.contains("colored")) {
+      circleColor = document.getElementById("circle" + i + j).classList[3].split("bg-")[1];
 
       if (circleColor === color) {
         toBeColored = true;
         break;
       }
 
-      indexArray.push(index);
-      index = index + change;
+      indexArray.push({ i: i, j: j });
+      i = i + row;
+      j = j + column;
     } else break;
   }
 
-  return toBeColored && (indexArray.length > 0);
+  return { toBeColored: toBeColored && indexArray.length > 0, score: indexArray.length };
 }
 
 function colorChanger(toBeColored, indexArray, color, oppositeColor) {
   if (toBeColored) {
-    indexArray.forEach(i => {
-      document.getElementById("circle" + i).classList.remove("bg-" + oppositeColor);
-      document.getElementById("circle" + i).classList.add("bg-" + color);
+    indexArray.forEach(value => {
+      document.getElementById("circle" + value.i + value.j).classList.remove("bg-" + oppositeColor);
+      document.getElementById("circle" + value.i + value.j).classList.add("bg-" + color);
     });
   }
 }
 
-function computerClick(){
-  sequenceArray.every((i) => {
-    if(!document.getElementById("circle" + i).classList.contains("colored") && isClickable(i, 'red')){
-      document.getElementById("circle" + i).classList.add("colored");
-      document.getElementById("circle" + i).classList.add(bgColorClass);
-      userTurn = false;
-      reverseAlgorithm(i, 'red');
-      bgColorClass = bgColorClass === "bg-red" ? "bg-blue" : "bg-red";
-      displayResult();
-      return false;
+function computerClick() {
+  var score = [];
+  var selected;
+  sequenceArray1.forEach(val => {
+    if (!document.getElementById("circle" + val.i + val.j).classList.contains("colored") && isClickable(val.i, val.j, "red")){
+      let points = getScore(val.i, val.j, 'red');
+      score.push(points);
     }
-    return true;
-  })
+    else 
+      score.push(0);
+  });
+
+  if(score.length > 0 && Math.max(...score) > 0)
+    selected = sequenceArray1[score.indexOf(Math.max(...score))];
+
+  else{
+    score = [];
+    sequenceArray2.forEach(val => {
+      if (!document.getElementById("circle" + val.i + val.j).classList.contains("colored") && isClickable(val.i, val.j, "red")){
+        let points = getScore(val.i, val.j, 'red');
+        score.push(points);
+      }
+      else 
+        score.push(0);
+    });
+  
+    if(score.length > 0 && Math.max(...score) > 0)
+      selected = sequenceArray2[score.indexOf(Math.max(...score))];
+
+    else{
+      score = [];
+      sequenceArray3.forEach(val => {
+        if (!document.getElementById("circle" + val.i + val.j).classList.contains("colored") && isClickable(val.i, val.j, "red")){
+          let points = getScore(val.i, val.j, 'red');
+          score.push(points);
+        }
+        else 
+          score.push(0);
+      });
+    
+      if(score.length > 0 && Math.max(...score) > 0)
+        selected = sequenceArray3[score.indexOf(Math.max(...score))];
+
+      else{
+        score = [];
+        sequenceArray4.forEach(val => {
+          if (!document.getElementById("circle" + val.i + val.j).classList.contains("colored") && isClickable(val.i, val.j, "red")){
+            let points = getScore(val.i, val.j, 'red');
+            score.push(points);
+          }
+          else 
+            score.push(0);
+        });
+      
+        if(score.length > 0 && Math.max(...score) > 0)
+          selected = sequenceArray4[score.indexOf(Math.max(...score))];
+      }
+    }
+  }
+
+  document.getElementById("circle" + selected.i + selected.j).classList.add("colored");
+  document.getElementById("circle" + selected.i + selected.j).classList.add(bgColorClass);
+  reverseAlgorithm(selected.i, selected.j, "red");
+  bgColorClass = bgColorClass === "bg-red" ? "bg-blue" : "bg-red";
+  displayResult();
+
 }
 
-function displayResult(){
+function displayResult() {
   var red = 0;
   var blue = 0;
-  for (let index = 1; index <= 64; index++) {
-    if(document.getElementById("circle" + index).classList.contains('bg-red')){
-      red++;
-    }
-    else if(document.getElementById("circle" + index).classList.contains('bg-blue')){
-      blue++;
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      if (document.getElementById("circle" + i + j).classList.contains("bg-red")) {
+        red++;
+      } else if (document.getElementById("circle" + i + j).classList.contains("bg-blue")) {
+        blue++;
+      }
     }
   }
 
@@ -160,6 +294,6 @@ function displayResult(){
   document.getElementById("resultRed").textContent = "Red: " + red;
 }
 
-function reset(){
+function reset() {
   location.reload();
 }

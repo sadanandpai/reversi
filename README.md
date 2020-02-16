@@ -1,2 +1,1 @@
-# reversi
-Reversi game
+# tictactoe
