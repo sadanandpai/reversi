@@ -1,0 +1,54 @@
+*{
+  box-sizing: border-box;
+  margin: 0px;
+}
+body, html {
+  margin: auto;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  padding: 0px;
+}
+
+body{
+  text-align: center;
+  background-color: lightgreen;
+}
+
+.box{
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  margin: 1px 1px;
+  padding-top: 15px;
+}
+
+.circle{
+  height: 25px;
+  width: 25px;
+  border-radius: 50% 50%;
+  border: 1px solid black;
+}
+
+.inline-block{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cross{
+  background-color: lightgreen;
+}
+
+.bingo-label{
+  margin: 0px 5px; 
+  height: 10xp; 
+  width: 40px; 
+  text-align: center;
+}
+
+.bg-red{
+  background-color: red;
+}
+
+.bg-blue{
+  background-color: blue;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Reversi by Pai</title>
+    <link rel="stylesheet" href="./app.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Reversi" />
+    <link rel="apple-touch-icon" href="./icons/icon-152x152.png" />
+    <meta name="description" content="Reversi" />
+    <meta name="theme-color" content="#2F3BA2" />
+  </head>
+  <body>
+    <h1 style="margin: 10px;">Reversi !!!</h1>
+    <div>
+      <div class="box inline-block"><span id="circle1" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle2" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle3" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle4" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle5" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle6" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle7" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle8" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle9" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle10" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle11" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle12" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle13" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle14" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle15" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle16" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle17" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle18" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle19" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle20" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle21" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle22" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle23" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle24" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle25" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle26" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle27" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle28" class="inline-block circle colored bg-blue"></span></div><div class="box inline-block"><span id="circle29" class="inline-block circle colored bg-red"></span></div><div class="box inline-block"><span id="circle30" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle31" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle32" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle33" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle34" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle35" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle36" class="inline-block circle colored bg-red"></span></div><div class="box inline-block"><span id="circle37" class="inline-block circle colored bg-blue"></span></div><div class="box inline-block"><span id="circle38" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle39" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle40" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle41" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle42" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle43" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle44" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle45" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle46" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle47" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle48" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle49" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle50" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle51" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle52" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle53" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle54" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle55" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle56" class="inline-block circle"></span></div>
+    </div>
+    <div>
+      <div class="box inline-block"><span id="circle57" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle58" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle59" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle60" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle61" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle62" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle63" class="inline-block circle"></span></div><div class="box inline-block"><span id="circle64" class="inline-block circle"></span></div>
+    </div>
+
+    <div class="result" style="margin: 10px;">
+      <div class="inline-block" id="resultBlue" style="margin: 10px;">Blue: 2</div>
+      <div class="inline-block" id="resultRed" style="margin: 10px;">Red: 2</div>
+    </div>
+
+    <div class="result" style="margin: 10px;">
+      <button id="reset" onclick="reset()">Reset</button>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
